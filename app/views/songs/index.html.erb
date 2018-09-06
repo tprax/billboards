@@ -2,7 +2,7 @@
 <ul>
 <% @songs.each do |song| %>
   <li>
-    <%#binding.pry%>
+    
     <%= song.name %>
     <%= link_to 'Edit Song', params.key?("artist_id") ? (edit_artist_song_path(@var, song)) : (edit_billboard_song_path(@var, song)) %>
     <%= link_to 'Delete Song', params.key?("artist_id") ? (artist_song_path(@var, song)) : (billboard_song_path(@var, song)) , method: :delete%>

@@ -26,11 +26,11 @@ class SongsController < ApplicationController
     @song = @var.songs.new(song_params)
     # binding.pry
     if @song.save
-      binding.pry
+     
       params.key?("artist_id") ? (redirect_to artist_path(@var)) : (redirect_to billboard_path(@var))
       # redirect_to artist_path(@var)
     else
-      binding.pry
+      
       render :new
     end
 
@@ -42,7 +42,7 @@ class SongsController < ApplicationController
 
   def update
     if @song.update(song_params)
-      params.key?("artist_id") ? (redirect_to artist_song_path(@var, @song)) : (redirect_to billboard_song_path(@var, @song))
+      params.key?("artist_id") ? (redirect_to artist_song_path(@var, @song)) : (redirect_to billboard_songs_path(@var))
       # redirect_to artist_song_path(@var, @song)
     else
       render partial: 'edit'
