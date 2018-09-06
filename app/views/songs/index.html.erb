@@ -1,12 +1,12 @@
-<h3><%= @artist.name%></h3>
+<h3><%= @var.name%></h3>
 <ul>
 <% @songs.each do |song| %>
   <li>
     <%=song.name%>
-    <%= link_to 'Edit Song', edit_artist_song_path(@artist, song)%>
-    <%= link_to 'Delete Song', artist_song_path(@artist, song), method: :delete%>
+    <%= link_to 'Edit Song', params.key?("artist_id") ? (edit_artist_song_path(@var, song)) : (edit_billboard_song_path(@var, song)) %>
+    <%= link_to 'Delete Song', params.key?("artist_id") ? (artist_song_path(@var, song)) : (billboard_song_path(@var, song)) , method: :delete%>
   </li>
   
 <%end%>
 </ul>
-<%= link_to "Create A Song", new_artist_song_path(@artist)%>
+<%= link_to "Create A Song", params.key?("artist_id") ? (new_artist_song_path(@var)) : (new_artist_song_path(@var)) %>

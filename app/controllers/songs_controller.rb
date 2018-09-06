@@ -1,10 +1,13 @@
 class SongsController < ApplicationController
   
-  before_action :set_artist
+  before_action :ask_action 
   before_action :set_song, except: [:index, :new, :create]
   
+  # params.key?("artist_id")
+  
   def index
-    @songs = @artist.songs
+    # binding.pry
+    @songs = @var.songs
     
   end
 
@@ -13,17 +16,18 @@ class SongsController < ApplicationController
   end
 
   def new
-    @song = @artist.songs.new
+    @song = @var.songs.new
     
     render partial: 'form'
   end
 
   def create
 
-    @song = @artist.songs.new(song_params)
+    @song = @var.songs.new(song_params)
 
     if @song.save
-      redirect_to artist_path(@artist)
+      params.key?("artist_id") ? (redirect_to artist_path(@var)) : (redirect_to billboard_path(@var))
+      # redirect_to artist_path(@var)
     else
       render :new
     end
@@ -36,7 +40,8 @@ class SongsController < ApplicationController
 
   def update
     if @song.update(song_params)
-      redirect_to artist_song_path(@artist, @song)
+      params.key?("artist_id") ? (redirect_to artist_song_path(@var, @song)) : (redirect_to billboard_song_path(@var, @song))
+      # redirect_to artist_song_path(@var, @song)
     else
       render partial: 'edit'
     end
@@ -45,13 +50,25 @@ class SongsController < ApplicationController
 
   def destroy
     @song.destroy
-    redirect_to artist_songs_path(@artist)
+    params.key?("artist_id") ? (redirect_to artist_songs_path(@var)) : (redirect_to billboard_songs_path(@var))
   end
 
   private
 
+    def ask_action
+      if params.key?("artist_id")
+        set_artist
+      elsif params.key?("billboard_id")
+        set_billboard
+      end
+    end
+
     def set_artist
-      @artist = Artist.find(params[:artist_id])
+      @var = Artist.find(params[:artist_id])
+    end
+
+    def set_billboard
+      @var = Billboard.find(params[:billboard_id])
     end
 
     def set_song
@@ -62,5 +79,12 @@ class SongsController < ApplicationController
       params.require(:song).permit(:name)
     end
 
+    # def var_song_path(id1, id2)
+    #   if var==artist
+    #     artist_song_path
+    #   elsif var == billboard_id
+    #     billboard_song_path
+    #   end
+    # end
 
 end
