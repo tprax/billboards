@@ -6,7 +6,6 @@ class SongsController < ApplicationController
   # params.key?("artist_id")
   
   def index
-    # binding.pry
     @songs = @var.songs
     
   end
@@ -70,8 +69,12 @@ class SongsController < ApplicationController
     end
 
     def set_billboard
+<<<<<<< HEAD
       # binding.pry
       @var = Billboard.find(params[:billboard_id])
+=======
+      @billboard = Billboard.find(params[:billboard_id])
+>>>>>>> text change
     end
 
     def set_song
