@@ -2,7 +2,8 @@
 <%= link_to "Create New Billboard", new_billboard_path %>
 </br>
 <% @billboards.each do |billboard| %>
-  <%= link_to billboard.chart_name, billboard_songs_path(@billboards) %>
+
+  <%= link_to billboard.chart_name, billboard_songs_path(billboard) %>
   <%= link_to 'Edit', edit_billboard_path(billboard.id) %>
   <%= link_to 'Delete', billboard_path(billboard.id), method: :delete %>
   </br>

@@ -22,13 +22,15 @@ class SongsController < ApplicationController
   end
 
   def create
-
+    # binding.pry
     @song = @var.songs.new(song_params)
-
+    # binding.pry
     if @song.save
+      binding.pry
       params.key?("artist_id") ? (redirect_to artist_path(@var)) : (redirect_to billboard_path(@var))
       # redirect_to artist_path(@var)
     else
+      binding.pry
       render :new
     end
 
@@ -68,6 +70,7 @@ class SongsController < ApplicationController
     end
 
     def set_billboard
+      # binding.pry
       @var = Billboard.find(params[:billboard_id])
     end
 
@@ -76,7 +79,7 @@ class SongsController < ApplicationController
     end
 
     def song_params
-      params.require(:song).permit(:name)
+      params.require(:song).permit(:name, :artist_id, :billboard_id)
     end
 
     # def var_song_path(id1, id2)
