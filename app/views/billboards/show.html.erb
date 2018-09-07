@@ -1,2 +1,7 @@
 <h1><%= @billboard.chart_name %></h1>
+<%= link_to 'Add Song', new_billboard_song_path(@billboard) %>
 <hr />
+<% @songs.each do |song| %>
+  <%= song.name %>
+  <br />
+  <% end %>

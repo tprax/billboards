@@ -37,6 +37,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'semantic-ui-sass'
 =======
 gem 'devise'
+gem 'semantic-ui-sass'
+
 
 >>>>>>> not important
 gem 'devise'

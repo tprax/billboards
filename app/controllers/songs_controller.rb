@@ -6,7 +6,7 @@ class SongsController < ApplicationController
   # params.key?("artist_id")
   
   def index
-    @songs = @var.songs
+    @songs = @artist.songs
     
   end
 
@@ -15,15 +15,27 @@ class SongsController < ApplicationController
   end
 
   def new
+    if @billboard
+      @var = set_billboard
+    else
+      @var = set_artist
+    end
     @song = @var.songs.new
+    
     
     render partial: 'form'
   end
 
   def create
-    # binding.pry
+
+    if @billboard
+      @var = set_billboard
+    else
+      @var = set_artist
+    end
+
     @song = @var.songs.new(song_params)
-    # binding.pry
+
     if @song.save
      
       params.key?("artist_id") ? (redirect_to artist_path(@var)) : (redirect_to billboard_path(@var))
@@ -50,6 +62,13 @@ class SongsController < ApplicationController
   end
 
   def destroy
+
+    if @billboard
+      @var = set_billboard
+    else
+      @var = set_artist
+    end
+
     @song.destroy
     params.key?("artist_id") ? (redirect_to artist_songs_path(@var)) : (redirect_to billboard_songs_path(@var))
   end
@@ -65,7 +84,7 @@ class SongsController < ApplicationController
     end
 
     def set_artist
-      @var = Artist.find(params[:artist_id])
+      @artist = Artist.find(params[:artist_id])
     end
 
     def set_billboard
