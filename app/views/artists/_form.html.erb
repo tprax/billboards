@@ -1,8 +1,13 @@
+
 <h1><%= @artist.id ? 'Edit Artist' : 'Add Artist' %></h1>
 <hr />
+<form class="ui form">
+<div class="field">
 <%= form_for @artist do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   
-  <%= f.submit %>
+  <%= f.submit nil, class: 'ui button primary' %>
 <% end %>
+</div>
+</form>

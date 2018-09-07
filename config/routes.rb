@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
 root 'billboards#index'
+devise_for :users
 
 resources :billboards do
   resources :songs

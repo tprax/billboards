@@ -1,3 +1,9 @@
-<%= link_to 'Billboards', root_path %>
-<%= link_to 'Artists', artists_path %>
-<%= button_to 'Log Out', destroy_user_session_path, method: :delete %>
+<div class="ui three item menu>
+
+<a class="item", <%= link_to 'Billboards', billboards_path %>
+</a>
+<a class="item", <%= link_to 'Artist', artists_path %>
+</a>
+<a class="item", <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+</a>
+</div>
